@@ -62,21 +62,28 @@ It demonstrates **state management (read/unread/snoozed)**, **delivery strategie
   ```http
   POST /admin/alerts
 - **List Alerts**
-  ```GET /admin/alerts
+  ```http
+  GET /admin/alerts
 - **Trigger Reminders**
-  ```POST /system/trigger_reminders
+  ```http
+  POST /system/trigger_reminders
 ### User
 - **List Alerts for a User**
-  ```GET /users/{user_id}/alerts
+  ```http
+  GET /users/{user_id}/alerts
 - **Snooze Alert**
-  ```POST /users/{user_id}/alerts/{alert_id}/snooze
+  ```http
+  POST /users/{user_id}/alerts/{alert_id}/snooze
 - **Mark Read**
-   ```POST /users/{user_id}/alerts/{alert_id}/read
+   ```http
+   POST /users/{user_id}/alerts/{alert_id}/read
 - **Mark Unread**
-  ```POST /users/{user_id}/alerts/{alert_id}/unread
+  ```http
+  POST /users/{user_id}/alerts/{alert_id}/unread
 ### Analytics
 - **View Metrics**
-   ```GET /analytics
+   ```http
+   GET /analytics
 ## Demo Data (Seeded)
 
 When the server starts, it automatically seeds demo data:
