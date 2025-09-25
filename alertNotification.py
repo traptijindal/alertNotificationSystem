@@ -555,7 +555,6 @@ def user_fetch_alerts(user_id: str, include_snoozed: bool = Query(False)):
         })
     return {"alerts": applicable_alerts}
 
-
 @app.post("/users/{user_id}/alerts/{alert_id}/snooze")
 def user_snooze_alert(user_id: str, alert_id: str):
     user = UserManager.get_user(user_id)
@@ -578,10 +577,15 @@ def user_mark_read(user_id: str, alert_id: str):
     user = UserManager.get_user(user_id)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
+    alert = DB["alerts"].get(alert_id)
+    if not alert:
+        raise HTTPException(status_code=404, detail="Alert not found")
     key = (user_id, alert_id)
     pref = DB["user_alert_prefs"].get(key)
     if not pref:
-        raise HTTPException(status_code=404, detail="User alert preference not found")
+        # Auto-create preference
+        pref = UserAlertPreference(user_id=user_id, alert_id=alert_id, state=UnreadState())
+        DB["user_alert_prefs"][key] = pref
     pref.mark_read()
     return {"result": "marked_read", "last_read_at": pref.last_read_at}
 
@@ -591,12 +595,19 @@ def user_mark_unread(user_id: str, alert_id: str):
     user = UserManager.get_user(user_id)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
+    alert = DB["alerts"].get(alert_id)
+    if not alert:
+        raise HTTPException(status_code=404, detail="Alert not found")
     key = (user_id, alert_id)
     pref = DB["user_alert_prefs"].get(key)
     if not pref:
-        raise HTTPException(status_code=404, detail="User alert preference not found")
+        # Auto-create preference
+        pref = UserAlertPreference(user_id=user_id, alert_id=alert_id, state=UnreadState())
+        DB["user_alert_prefs"][key] = pref
     pref.mark_unread()
     return {"result": "marked_unread"}
+
+
 
 @app.get("/admin/deliveries")
 def admin_list_deliveries():
