@@ -110,6 +110,9 @@ When the server starts, it automatically seeds demo data:
 <img width="1066" height="671" alt="image" src="https://github.com/user-attachments/assets/204cb1f1-67e2-4f26-91f5-177de1443622" />
 <img width="542" height="504" alt="image" src="https://github.com/user-attachments/assets/c78140ab-79a0-437a-b600-c6ff8338d402" />
 <img width="783" height="599" alt="image" src="https://github.com/user-attachments/assets/a5a7ef78-2c5d-46b1-9728-57772cc64551" />
+<img width="891" height="361" alt="image" src="https://github.com/user-attachments/assets/58a4931f-4b36-4a70-9515-5679eb03c270" />
+<img width="903" height="386" alt="image" src="https://github.com/user-attachments/assets/00a2db86-4b16-46bd-9951-2afbfedec9a1" />
+
 
 
 
